@@ -112,3 +112,54 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+
+function createArticle(articleData) {
+
+const article = document.createElement('div')
+const articleTitle = document.createElement('h2');
+const articleDate = document.createElement('p');
+const pTag1 = document.createElement('p');
+const pTag2 = document.createElement('p');
+const pTag3 = document.createElement('p');
+const expandButton = document.createElement('span');
+
+// content
+article.classList.add("article");
+articleDate.classList.add("date");
+expandButton.classList.add("expandButton");
+
+article.appendChild(articleTitle);
+article.appendChild(articleDate);
+article.appendChild(pTag1);
+article.appendChild(pTag2);
+article.appendChild(pTag3);
+article.appendChild(expandButton);
+
+articleTitle.textContent = articleData.title;
+articleDate.textContent = articleData.date;
+pTag1.textContent = articleData.firstParagraph;
+pTag2.textContent = articleData.secondParagraph;
+pTag3.textContent = articleData.thirdParagraph;
+expandButton.textContent = "Read Me";
+
+const openMenu = () => article.classList.toggle("article-open");
+
+expandButton.onclick = () => openMenu();
+expandButton.addEventListener("keyup", event => {
+  if (event.keyCode === 13 || event.keyCode === 32) {
+    openMenu();
+  }
+});
+return article;
+}
+let articles = data.map(article => {
+return createArticle(article);
+});
+const articleDiv = document.querySelector(".articles");
+
+articleDiv.appendChild(articles[0]);
+articleDiv.appendChild(articles[1]);
+articleDiv.appendChild(articles[2]);
+articleDiv.appendChild(articles[3]);
